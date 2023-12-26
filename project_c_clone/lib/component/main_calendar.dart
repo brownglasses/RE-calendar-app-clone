@@ -30,22 +30,23 @@ class MainCalendar extends StatelessWidget {
         formatButtonVisible: false,
       ),
       calendarStyle: CalendarStyle(
-        isTodayHighlighted: false,
-        selectedDecoration: BoxDecoration(
-          border: Border.all(color: PRIMARY_COLOR, width: 1.0),
-          borderRadius: BorderRadius.circular(10),
-          color: LIGHT_GREY_COLOR,
-        ),
-        selectedTextStyle: textStyle.copyWith(
-          color: PRIMARY_COLOR,
-        ),
-        weekendTextStyle: textStyle.copyWith(color: PRIMARY_COLOR),
-        weekendDecoration: BoxDecoration(
-            color: LIGHT_GREY_COLOR, borderRadius: BorderRadius.circular(10)),
-        defaultTextStyle: textStyle,
-        defaultDecoration: BoxDecoration(
-            color: LIGHT_GREY_COLOR, borderRadius: BorderRadius.circular(10)),
-      ),
+          isTodayHighlighted: false,
+          selectedDecoration: BoxDecoration(
+            border: Border.all(color: PRIMARY_COLOR, width: 1.0),
+            borderRadius: BorderRadius.circular(10),
+            color: LIGHT_GREY_COLOR,
+          ),
+          selectedTextStyle: textStyle.copyWith(
+            color: PRIMARY_COLOR,
+          ),
+          weekendTextStyle: textStyle.copyWith(color: PRIMARY_COLOR),
+          weekendDecoration: BoxDecoration(
+              color: LIGHT_GREY_COLOR, borderRadius: BorderRadius.circular(10)),
+          defaultTextStyle: textStyle,
+          defaultDecoration: BoxDecoration(
+              color: LIGHT_GREY_COLOR, borderRadius: BorderRadius.circular(10)),
+          outsideDecoration: const BoxDecoration(color: Colors.transparent),
+          outsideTextStyle: textStyle),
     );
   }
 }

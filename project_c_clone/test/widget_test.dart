@@ -1,30 +1,68 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:provider/provider.dart';
 
-import 'package:project_c_clone/main.dart';
+const Color darkBlue = Color.fromARGB(255, 18, 32, 47);
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  runApp(const MyApp());
+}
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: darkBlue,
+      ),
+      debugShowCheckedModeBanner: false,
+      home: const Scaffold(
+        body: Center(
+          child: ViewPage(),
+        ),
+      ),
+    );
+  }
+}
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
-  });
+class View extends StatelessWidget {
+  late var vm = ViewModel();
+  View({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    vm = Provider.of<ViewModel>(context);
+    return Column(
+      children: [
+        ElevatedButton(onPressed: vm.countUp, child: const Text("+1")),
+        Text(
+          '${vm.count}',
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+      ],
+    );
+  }
+}
+
+class ViewModel with ChangeNotifier {
+  int _count = 0;
+  int get count => _count;
+
+  void countUp() {
+    _count++;
+    notifyListeners();
+  }
+}
+
+class ViewPage extends StatelessWidget {
+  const ViewPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider<ViewModel>(
+      create: (_) => ViewModel(),
+      child: View(),
+    );
+  }
 }
