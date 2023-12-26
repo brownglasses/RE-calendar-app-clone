@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:project_c_clone/component/bottomSheet.dart';
 import 'package:project_c_clone/component/main_calendar.dart';
+import 'package:project_c_clone/color.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,6 +18,22 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (BuildContext context) {
+              return const CustomBottomSheet();
+            },
+          );
+        },
+        backgroundColor: PRIMARY_COLOR,
+        shape: const CircleBorder(),
+        child: const Text(
+          "+",
+          style: TextStyle(color: Colors.white, fontSize: 40),
+        ),
+      ),
       body: SafeArea(
         child: Column(
           children: [
@@ -25,7 +43,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-      ), 
+      ),
     );
   }
 
